@@ -7,4 +7,17 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # get '/task', to: 'tasks#index'
+  #index: Corresponds to GET /restaurants (List all restaurants).
+  #show: Corresponds to GET /restaurants/:id (Show details of a specific restaurant).
+  #new: Corresponds to GET /restaurants/new (create a new restaurant)
+  #create: Corresponds to POST /restaurants (Handle submission of the new restaurant form).
+    # A visitor can add a new review to a restaurant
+    # GET "restaurants/:restaurant_id/reviews/new" (e.g., "restaurants/38/reviews/new")
+    # POST "restaurants/:restaurant_id/reviews" (e.g., "restaurants/38/reviews")
+
+  resources :restaurants, only: [:index, :show, :new, :create] do
+    resources :reviews, only: [:new, :create]
+  end
 end
